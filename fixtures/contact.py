@@ -1,3 +1,5 @@
+import random
+import string
 from selenium.webdriver.support.ui import Select
 
 
@@ -84,4 +86,78 @@ class ContactHelper:
         wd.find_element_by_name("notes").send_keys(contact.notes)
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.return_to_home_page()
+
+    def delete_first(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # delete first contact
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # accept alert
+        wd.switch_to.alert.accept()
+
+    def update_first(self):
+        new_random_name = ''.join(random.choices(string.ascii_letters, k=10))
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # edit contact data
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(new_random_name)
+        wd.find_element_by_name("middlename").click()
+        wd.find_element_by_name("middlename").clear()
+        wd.find_element_by_name("middlename").send_keys(new_random_name)
+        wd.find_element_by_name("lastname").click()
+        wd.find_element_by_name("lastname").clear()
+        wd.find_element_by_name("lastname").send_keys(new_random_name)
+        wd.find_element_by_name("nickname").click()
+        wd.find_element_by_name("nickname").clear()
+        wd.find_element_by_name("nickname").send_keys(new_random_name)
+        wd.find_element_by_name("title").click()
+        wd.find_element_by_name("title").clear()
+        wd.find_element_by_name("title").send_keys(new_random_name)
+        wd.find_element_by_name("company").click()
+        wd.find_element_by_name("company").clear()
+        wd.find_element_by_name("company").send_keys(new_random_name)
+        wd.find_element_by_name("address").click()
+        wd.find_element_by_name("address").clear()
+        wd.find_element_by_name("address").send_keys(new_random_name)
+        wd.find_element_by_name("home").click()
+        wd.find_element_by_name("home").clear()
+        wd.find_element_by_name("home").send_keys(new_random_name)
+        wd.find_element_by_name("mobile").click()
+        wd.find_element_by_name("mobile").clear()
+        wd.find_element_by_name("mobile").send_keys(new_random_name)
+        wd.find_element_by_name("work").click()
+        wd.find_element_by_name("work").clear()
+        wd.find_element_by_name("work").send_keys(new_random_name)
+        wd.find_element_by_name("fax").click()
+        wd.find_element_by_name("fax").clear()
+        wd.find_element_by_name("fax").send_keys(new_random_name)
+        wd.find_element_by_name("email").click()
+        wd.find_element_by_name("email").clear()
+        wd.find_element_by_name("email").send_keys(new_random_name)
+        wd.find_element_by_name("email2").click()
+        wd.find_element_by_name("email2").clear()
+        wd.find_element_by_name("email2").send_keys(new_random_name)
+        wd.find_element_by_name("email3").click()
+        wd.find_element_by_name("email3").clear()
+        wd.find_element_by_name("email3").send_keys(new_random_name)
+        wd.find_element_by_name("homepage").click()
+        wd.find_element_by_name("homepage").clear()
+        wd.find_element_by_name("homepage").send_keys(new_random_name)
+        wd.find_element_by_name("address2").click()
+        wd.find_element_by_name("address2").clear()
+        wd.find_element_by_name("address2").send_keys(new_random_name)
+        wd.find_element_by_name("phone2").click()
+        wd.find_element_by_name("phone2").clear()
+        wd.find_element_by_name("phone2").send_keys(new_random_name)
+        wd.find_element_by_name("notes").click()
+        wd.find_element_by_name("notes").clear()
+        wd.find_element_by_name("notes").send_keys(new_random_name)
+        # submit contact update
+        wd.find_element_by_name("update").click()
         self.return_to_home_page()
