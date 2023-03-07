@@ -7,7 +7,9 @@ def random_value():
     return ''.join(random.choices(string.ascii_letters, k=8))
 
 
-def test_edit_first_contact(app):
+def test_modify_first_contact(app):
+    if app.contact.count() == 0:
+        app.contact.create(Contact(firstname="test"))
     app.contact.update_first(Contact(firstname=random_value(), middlename=random_value(), lastname=random_value(),
                                      nickname=random_value(), title=random_value(), company=random_value(),
                                      address=random_value(), home=random_value(),
