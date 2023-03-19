@@ -8,7 +8,6 @@ def random_value():
 
 
 def test_modify_first_contact(app):
-    old_contacts = app.contact.get_contacts_list()
     if app.contact.count() == 0:
         app.contact.create(Contact(firstname="test"))
     contact = Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov",
@@ -20,10 +19,11 @@ def test_modify_first_contact(app):
                       amonth="February", ayear="2026", address2="Temp_ivan_address",
                       phone2="build 1, flat 2",
                       notes="some notes about ivan")
+    old_contacts = app.contact.get_contacts_list()
     contact.id = old_contacts[0].id
     app.contact.update_first(contact)
+    assert len(old_contacts) == app.contact.count()
     new_contacts = app.contact.get_contacts_list()
-    assert len(old_contacts) == len(new_contacts)
     old_contacts[0] = contact
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
 
