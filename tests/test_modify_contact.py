@@ -1,5 +1,6 @@
 import random
 import string
+from random import randrange
 from models.contact import Contact
 
 
@@ -7,7 +8,7 @@ def random_value():
     return ''.join(random.choices(string.ascii_letters, k=8))
 
 
-def test_modify_first_contact(app):
+def test_modify_some_contact(app):
     if app.contact.count() == 0:
         app.contact.create(Contact(firstname="test"))
     contact = Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov",
@@ -20,10 +21,11 @@ def test_modify_first_contact(app):
                       phone2="build 1, flat 2",
                       notes="some notes about ivan")
     old_contacts = app.contact.get_contacts_list()
-    contact.id = old_contacts[0].id
-    app.contact.update_first(contact)
+    index = randrange(len(old_contacts))
+    contact.id = old_contacts[index].id
+    app.contact.update_contact_by_index(contact, index)
     assert len(old_contacts) == app.contact.count()
     new_contacts = app.contact.get_contacts_list()
-    old_contacts[0] = contact
+    old_contacts[index] = contact
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
 
