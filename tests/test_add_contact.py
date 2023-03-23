@@ -10,7 +10,7 @@ def test_add_contact(app):
                       email="ivanii@temp.com", email2="ivanii@temp.ru", email3="ivanii@temp.su",
                       homepage="ivan.temp.ru", bday="21", bmonth="February", byear="1986", aday="21",
                       amonth="February", ayear="2026", address2="Temp_ivan_address",
-                      phone2="build 1, flat 2",
+                      phone2="+79987654222",
                       notes="some notes about ivan")
     app.contact.create(contact)
     assert len(old_contacts) + 1 == app.contact.count()

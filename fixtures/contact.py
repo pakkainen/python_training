@@ -86,12 +86,22 @@ class ContactHelper:
     def delete_first(self):
         self.delete_contact_by_index(0)
 
+    def open_contact_to_edit_by_index(self, index):
+        wd = self.app.wd
+        self.open_contacts_list()
+        entry = wd.find_elements_by_name("entry")[index]
+        entry.find_element_by_xpath("./td[8]").click()
+
+    def open_contact_to_view_by_index(self, index):
+        wd = self.app.wd
+        self.open_contacts_list()
+        entry = wd.find_elements_by_name("entry")[index]
+        entry.find_element_by_xpath("./td[7]").click()
+
     def update_contact_by_index(self, contact, index):
         wd = self.app.wd
         self.open_contacts_list()
-        self.select_contact_by_index(index)
-        # edit contact data
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        self.open_contact_to_edit_by_index(index)
         self.fill_contact_form(contact)
         # submit contact update
         wd.find_element_by_name("update").click()
