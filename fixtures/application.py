@@ -5,7 +5,6 @@ from fixtures.contact import ContactHelper
 import os
 
 install_dir = "/snap/firefox/current/usr/lib/firefox"
-# driver_loc = os.path.join(install_dir, "geckodriver")
 binary_loc = os.path.join(install_dir, "firefox")
 
 opts = webdriver.FirefoxOptions()
@@ -22,8 +21,7 @@ class Application:
             self.wd = webdriver.Ie()
         else:
             raise ValueError("Unrecognized browser %s" % browser)
-        # self.wd = webdriver.Chrome(executable_path=r'/usr/bin/chromedriver')
-        # self.wd.implicitly_wait(1)
+        self.wd.implicitly_wait(2)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
