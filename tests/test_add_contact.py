@@ -6,7 +6,7 @@ from models.contact import Contact
 
 def random_string(prefix, maxlen):
     symbols = string.ascii_letters + string.digits + '!"#＄%&()*+,-./:;=>?@[]^_`{|}~' + " " * 10
-    # исключаются при сохранении и пробел ' ' в конце строки, '\\' из строки и все символы после <,
+    # исключается при сохранении пробел ' ' в конце строки, '\\' из строки и все символы после <,
     # одинарная ковычка вызывает ошибку БД
     # повторяющиеся пробелы не отображаются в списке
     return prefix + ''.join([random.choice(symbols) for i in range(random.randrange(maxlen))])
