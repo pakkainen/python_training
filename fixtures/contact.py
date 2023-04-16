@@ -102,6 +102,31 @@ class ContactHelper:
     def delete_first(self):
         self.delete_contact_by_index(0)
 
+    def add_contact_to_group_by_id(self, contact_id, group_id):
+        wd = self.app.wd
+        self.open_contacts_list()
+        self.select_contact_by_id(contact_id)
+        # select group by id
+        wd.find_element_by_name("to_group").find_element_by_css_selector("option[value='%s']" % group_id).click()
+        # add contact to group
+        wd.find_element_by_name("add"). click()
+        self.contact_cache = None
+
+    def filter_contacts_by_group_id(self, group_id):
+        wd = self.app.wd
+        wd.find_element_by_name("group").find_element_by_css_selector("option[value='%s']" % group_id).click()
+
+    def remove_contact_from_group_by_id(self, contact_id, group_id):
+        wd = self.app.wd
+        self.open_contacts_list()
+        # select group by id
+        self.filter_contacts_by_group_id(group_id)
+        self.select_contact_by_id(contact_id)
+        # remove contact from group
+        wd.find_element_by_name("remove").click()
+        self.open_contacts_list()
+        self.contact_cache = None
+
     def open_contact_to_edit_by_index(self, index):
         wd = self.app.wd
         self.open_contacts_list()
